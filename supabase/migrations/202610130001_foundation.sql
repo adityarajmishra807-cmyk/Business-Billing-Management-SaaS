@@ -232,23 +232,14 @@ using (
   or public.has_business_role(business_id, array['owner', 'admin']::text[])
 );
 
+-- Membership mutations are deliberately not exposed in Phase 1.
+-- The business creator's owner membership is written only by the security-definer trigger above.
+-- Future team/invitation features should add carefully validated server-side membership actions.
 drop policy if exists business_members_insert_managers on public.business_members;
-create policy business_members_insert_managers on public.business_members
-for insert to authenticated
-with check (public.has_business_role(business_id, array['owner', 'admin']::text[]));
-
 drop policy if exists business_members_update_managers on public.business_members;
-create policy business_members_update_managers on public.business_members
-for update to authenticated
-using (public.has_business_role(business_id, array['owner', 'admin']::text[]))
-with check (public.has_business_role(business_id, array['owner', 'admin']::text[]));
-
 drop policy if exists business_members_delete_managers on public.business_members;
-create policy business_members_delete_managers on public.business_members
-for delete to authenticated
-using (public.has_business_role(business_id, array['owner', 'admin']::text[]));
 
 grant usage on schema public to authenticated;
 grant select, insert, update, delete on public.profiles to authenticated;
 grant select, insert, update, delete on public.businesses to authenticated;
-grant select, insert, update, delete on public.business_members to authenticated;
+grant select on public.business_members to authenticated;
