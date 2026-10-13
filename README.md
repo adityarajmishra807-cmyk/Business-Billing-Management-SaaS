@@ -4,7 +4,7 @@ Phase 1 foundation by Horizon Works.
 
 ## Stack
 
-- Next.js App Router
+- Next.js 16 App Router
 - TypeScript
 - Tailwind CSS
 - Supabase Auth and PostgreSQL
@@ -24,7 +24,7 @@ Invoices, GST calculations, PDFs, inventory, purchases, expenses, financial repo
 
 ## Local setup
 
-1. Install Node.js 20.9 or later.
+1. Install Node.js 20.9 or later (use a current supported LTS release).
 2. Install dependencies with npm install.
 3. Create a Supabase project.
 4. Copy .env.example to .env.local and set the public Supabase project URL and anon/publishable key.
